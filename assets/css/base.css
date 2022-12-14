@@ -21,12 +21,25 @@ html {
     box-sizing: border-box;
 }
 
-.side_bar {
+.has-arrow::after {
+    position: absolute;
+    transform: rotate(0deg) translate(0,-50%);
+    transform-origin: top;
+    top: 50%;
+    transition: all .3s ease-out;
+    right: 30px;
+    content: "\e64b";
+    font-family: themify;
+    color: #a5adc6;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+.sidebar {
     height: 100vh;
     width: 270px;
     left: 0;
     top: 0;
-    padding-bottom: 50px;
     position: fixed;
     background-color: #f2f2f2;
 }
@@ -39,7 +52,11 @@ html {
     justify-content: space-between!important;
 }
 
-.side_bar__logo {
+.align-item-center {
+    align-items: center;
+}
+
+.sidebar__logo {
     margin: 30px;
     background: #fff;
     padding: 33px 30px;
@@ -47,20 +64,47 @@ html {
     box-shadow: 0 1px 2px #e0e0e0;
 }
 
-.side_bar__logo a {
+.sidebar__logo a {
     height: auto;
     text-decoration: none;
 }
 
-.side_bar__logo img {
+.sidebar__logo img {
     width: 100%;
     height: 100%;
 }
 
-.side_bar__item {
-    
+
+.sidebar__item {
+    text-decoration: none;
+    font-size: 1.5rem;
+    align-items: center;
 }
 
-.side_bar__item--active {
+.sidebar__item--active {
+    color: #a0a0a0;
+}
 
+.sidebar__btn {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 15px 25px 15px 30px;
+    font-weight: 400;
+    font-size: 1.6rem;
+}
+
+.sidebar__btn i {
+    margin-right: 10px;
+}
+
+.content {
+    padding-left: 270px;
+    width: 100%;
+    padding-top: 0 !important;
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 100px;
+    overflow: hidden;
 }
