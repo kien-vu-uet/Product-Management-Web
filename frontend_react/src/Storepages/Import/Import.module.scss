@@ -1,0 +1,49 @@
+.wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    flex-direction: column;
+}
+.order {
+    border: 1px solid;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    border-radius: 5px;
+    align-items: center;
+}
+.return {
+    background: #f0f0f0;
+    text-align: center;
+    width: 70px;
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-left: 6rem;
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+        background: rgb(93, 92, 92);
+        color: white;
+    }
+}
+.stock,
+.type {
+    width: 20%;
+}
+.stock,
+.type,
+.input {
+    margin: 2rem;
+}
+.input {
+    width: 20%;
+}
+.icon:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+.submit {
+    width: 20%;
+    margin: auto;
+}

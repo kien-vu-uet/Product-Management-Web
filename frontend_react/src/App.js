@@ -1,49 +1,39 @@
-import LoginForm from "./components/Login/LoginForm";
-import SelectRule from "./components/Login/SelectRule";
-import { useState } from "react";
-import "./components/Login/Login.css";
-import axios from "axios";
-import MainWindow from "./components/Main/MainWindow";
+import { Fragment } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { publicRoutes } from '~/routes';
+import { DefaultLayout } from '~/components/Layout';
 
 function App() {
-  const adminUser = {
-    email: "admin@gmail.com",
-    password: "123",
-    role: "admin"
-  };
-  const [user, setUser] = useState({ name: "", email: "", role : "" });
-  const [error, setError] = useState("");
+    return (
+        <Router>
+            <div className="App">
+                <Routes>
+                    {publicRoutes.map((routes, index) => {
+                        const Page = routes.component;
 
-  const Login = (details) => {
-    if (
-      details.email === adminUser.email &&
-      details.password === adminUser.password
-    ) {
-      console.log("Logged in");
-      setUser({
-        name: details.name,
-        email: details.email,
-        role : details.role
-      });
-    } else {
-      setError("Login failed !");
-    }
-    console.log(details);
-  };
+                        let Layout = DefaultLayout;
+                        if (routes.layout) {
+                            Layout = routes.layout;
+                        } else if (routes.layout === null) {
+                            Layout = Fragment;
+                        }
 
-  const Logout = () => {
-    setUser({ name: "", email: "" });
-    setError("");
-  };
-  return (
-    <div className="App">
-      {user.email === adminUser.email ? (
-        <MainWindow Logout =  {Logout} name = {user.name}/>
-      ) : (
-        <LoginForm Login={Login} error={error} />
-      )}
-    </div>
-  );
+                        return (
+                            <Route
+                                key={index}
+                                path={routes.path}
+                                element={
+                                    <Layout>
+                                        <Page />
+                                    </Layout>
+                                }
+                            />
+                        );
+                    })}
+                </Routes>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
