@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.button {
+    // display: block;
+    width: 15%;
+    height: 30px;
+    display: flex;
+    text-align: center;
+    box-sizing: content-box;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 15px;
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.02);
+    }
+}
+.function {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sort_filter {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.return {
+    position: absolute;
+    left: 65px;
+    top: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: #736cd6;
+    &:hover {
+        opacity: 0.9;
+        transform: scale(1.05);
+    }
+}
+
+.text_container {
+    font-weight: 400;
+    color: #fff;
+}
