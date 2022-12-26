@@ -22,7 +22,7 @@ function Import() {
                 setDatas(datas);
             });
     }, []);
-
+    let unique = [... new Set(datas.map(data => data.type))];
     return (
         <div className={cx('wrapper')}>
             <Link to="/" className={cx('return')}>
@@ -36,9 +36,9 @@ function Import() {
                         <option value="kho3">Kho hàng 3</option>
                     </select>
                     <select className={cx('type')} onChange={(e) => setTypes(e.target.value)}>
-                        {datas.map((data, index) => (
-                            <option key={index} value={data.type}>
-                                {data.type}
+                        {unique.map((uni) => (
+                            <option key={uni} value={uni}>
+                                {uni}
                             </option>
                         ))}
                     </select>
