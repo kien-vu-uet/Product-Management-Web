@@ -3,25 +3,50 @@ import styles from './CheckProduct.module.scss';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
-
+let product = [];
 function CheckProduct() {
     const [datas, setDatas] = useState([]);
-    useEffect(() => {
+    const fetchData = () => {
         fetch('http://localhost:8000/product')
             .then((res) => res.json())
-            .then((datas) => {
-                setDatas(datas);
+            .then(async (datas) => {
+                await setDatas(datas);
             });
+    };
+    useEffect(() => {
+        fetchData();
     }, []);
-
+    const handleSearch = async (target) => {
+        await fetchData();
+        if (target.length !== 0) {
+            datas.map((data) => {
+                if (data.type === target) {
+                    product.push(data);
+                }
+            });
+            console.log(product);
+        }
+    };
     return (
         <div className={cx('wrapper')}>
             <Link to="/" className={cx('return')}>
                 Return
             </Link>
             <div className={cx('search')}>
-                <input className={cx('input')} placeholder="Tìm kiếm theo mã sản phẩm" />
-                <button className={cx('button')}>Search</button>
+                <input
+                    className={cx('input')}
+                    placeholder="Tìm kiếm theo mã sản phẩm"
+                    onChange={(e) => handleSearch(e.target.value)}
+                />
+                <button
+                    className={cx('button')}
+                    onClick={() => {
+                        setDatas(product);
+                        product = [];
+                    }}
+                >
+                    Search
+                </button>
             </div>
             <div className={cx('container')}>
                 <table className={cx('table')} border="1">
