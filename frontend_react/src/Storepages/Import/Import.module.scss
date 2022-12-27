@@ -48,7 +48,17 @@
 .type,
 .input {
     margin: 2rem;
-    width: 30%;
+    width: 80%;
+}
+.amount{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    line-height: 0px;
+    transform: translateY(10px);
+}
+span {
+    transform: translateY(5px);
 }
 .stock,
 .type {

@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
+let unique = []
 function Import() {
     const [stocks, setStocks] = useState('kho1');
     const [types, setTypes] = useState('Fx_580_pl');
-    const [amounts, setAmounts] = useState('');
-
+    const [amounts, setAmounts] = useState(50);
     const [datas, setDatas] = useState([]);
     const handleSubmit = () => {
         console.log(stocks);
@@ -20,9 +20,12 @@ function Import() {
             .then((res) => res.json())
             .then((datas) => {
                 setDatas(datas);
+                console.log(datas);
             });
     }, []);
-    let unique = [... new Set(datas.map(data => data.type))];
+
+    unique = [...new Set(datas.map(data => data.type))]
+
     return (
         <div className={cx('wrapper')}>
             <Link to="/" className={cx('return')}>
@@ -42,11 +45,15 @@ function Import() {
                             </option>
                         ))}
                     </select>
-                    <input
-                        className={cx('input')}
-                        placeholder="nhập số lượng"
-                        onChange={(e) => setAmounts(e.target.value)}
-                    />
+                    <div className={cx('amount')}>
+                    <span>{amounts}</span>
+                        <input
+                            type="range"
+                            className={cx('input')}
+                            placeholder="nhập số lượng"
+                            onChange={(e) => setAmounts(e.target.value)}
+                        />
+                    </div>
                 </div>
                 <button className={cx('submit')} onClick={handleSubmit}>
                     Gửi yêu cầu
