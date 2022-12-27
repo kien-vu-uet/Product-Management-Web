@@ -25,11 +25,15 @@ function ProductCategory() {
     let unique = [...new Set(datas.map((data) => data.type))];
     return (
         <div className={cx('wrapper')}>
-            <Link to="/admin/productcategoryhome" className={cx('return')}>
-                <span className={cx('text_container')}>Return</span>
-            </Link>
+            <button className={cx('return')}>
+                {/* Return to Product Category Home page*/}
+                <Link to="/admin/productcategoryhome">
+                    <span className={cx('text_container')}>Return</span>
+                </Link>
+            </button>
+
             <div className={cx('container')}>
-                <div className={cx('order')}>
+                <div className={cx('category')}>
                     <select className={cx('stock')} onChange={(e) => setStocks(e.target.value)}>
                         <option value="kho1">Kho hàng 1</option>
                         <option value="kho2">Kho hàng 2</option>
@@ -42,14 +46,16 @@ function ProductCategory() {
                             </option>
                         ))}
                     </select>
-                    <input
-                        className={cx('input')}
-                        placeholder="nhập số lượng"
-                        onChange={(e) => setAmounts(e.target.value)}
-                    />
+
+                    <select className={cx('price')} onChange={(e) => setStocks(e.target.value)}>
+                        <option value="1">Giá thấp</option>
+                        <option value="2">Chưa bán</option>
+                        <option value="3">Chờ thu hồi</option>
+                        <option value="4">Đã thu hồi</option>
+                    </select>
                 </div>
                 <button className={cx('submit')} onClick={handleSubmit}>
-                    Gửi yêu cầu
+                    <span className={cx('text_container')}>Lọc sản phẩm</span>
                 </button>
             </div>
         </div>

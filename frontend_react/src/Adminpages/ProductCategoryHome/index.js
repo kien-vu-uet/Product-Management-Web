@@ -6,17 +6,21 @@ const cx = classNames.bind(styles);
 
 function ProductCategoryHome() {
     return (
-        <div className={cx('container')}>
-            <Link to="/admin" className={cx('return')}>
-                <span className={cx('text_container')}>Return</span>
-            </Link>
-            <div className={cx('function')}>
-                <Link className={cx('button')} to="/admin/productcategory">
-                    Quản lý sản phẩm
+        <div className={cx('wrapper')}>
+            <button className={cx('return')}>
+                <Link to="/admin">
+                    <span className={cx('text_container')}>Return</span>
                 </Link>
-                <Link className={cx('button')} to="/admin/revoke">
-                    Triệu hồi sản phẩm
-                </Link>
+            </button>
+            <div className={cx('container')}>
+                <div className={cx('function')}>
+                    <Link className={cx('button')} to="/admin/productcategory">
+                        Quản lý sản phẩm
+                    </Link>
+                    <Link className={cx('button')} to="/admin/revoke">
+                        Triệu hồi sản phẩm
+                    </Link>
+                </div>
             </div>
         </div>
     );
