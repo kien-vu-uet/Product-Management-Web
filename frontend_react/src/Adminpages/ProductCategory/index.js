@@ -1,14 +1,14 @@
 import classNames from 'classnames/bind';
-import styles from './Import.module.scss';
+import styles from './ProductCategory.module.scss';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
-let unique = []
-function Import() {
+function ProductCategory() {
     const [stocks, setStocks] = useState('kho1');
     const [types, setTypes] = useState('Fx_580_pl');
-    const [amounts, setAmounts] = useState(50);
+    const [amounts, setAmounts] = useState('');
+
     const [datas, setDatas] = useState([]);
     const handleSubmit = () => {
         console.log(stocks);
@@ -20,16 +20,13 @@ function Import() {
             .then((res) => res.json())
             .then((datas) => {
                 setDatas(datas);
-                console.log(datas);
             });
     }, []);
-
-    unique = [...new Set(datas.map(data => data.type))]
-
+    let unique = [...new Set(datas.map((data) => data.type))];
     return (
         <div className={cx('wrapper')}>
-            <Link to="/" className={cx('return')}>
-                Return
+            <Link to="/admin/productcategoryhome" className={cx('return')}>
+                <span className={cx('text_container')}>Return</span>
             </Link>
             <div className={cx('container')}>
                 <div className={cx('order')}>
@@ -45,15 +42,11 @@ function Import() {
                             </option>
                         ))}
                     </select>
-                    <div className={cx('amount')}>
-                    <span>{amounts}</span>
-                        <input
-                            type="range"
-                            className={cx('input')}
-                            placeholder="nhập số lượng"
-                            onChange={(e) => setAmounts(e.target.value)}
-                        />
-                    </div>
+                    <input
+                        className={cx('input')}
+                        placeholder="nhập số lượng"
+                        onChange={(e) => setAmounts(e.target.value)}
+                    />
                 </div>
                 <button className={cx('submit')} onClick={handleSubmit}>
                     Gửi yêu cầu
@@ -63,4 +56,4 @@ function Import() {
     );
 }
 
-export default Import;
+export default ProductCategory;

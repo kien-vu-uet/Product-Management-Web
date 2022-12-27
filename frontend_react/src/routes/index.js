@@ -5,10 +5,17 @@ import Home from '~/Storepages/Home';
 import Warranty from '~/Storepages/Warranty';
 import Sell from '~/Storepages/Sell';
 import Revoke from '~/Storepages/Revoke';
+import Admin from '~/Adminpages/Admin';
+import ProductCategoryHome from '~/Adminpages/ProductCategoryHome';
+import ProductCategory from '~/Adminpages/ProductCategory';
+import AdminRevoke from '~/Adminpages/Revoke'
+import AccountManagement from '~/Adminpages/AccountManagement';
+import AdminStatics from '~/Adminpages/Statics';
+
 
 export const publicRoutes = [
     {
-        path: '',
+        path: '/',
         component: Home,
     },
     {
@@ -30,6 +37,30 @@ export const publicRoutes = [
     {
         path: '/home/revoke',
         component: Revoke,
+    },
+    {
+        path: '/admin',
+        component: Admin,
+    },
+    {
+        path: '/admin/productcategoryhome',
+        component: ProductCategoryHome,
+    },
+    {
+        path: '/admin/productcategory',
+        component: ProductCategory,
+    },
+    {
+        path: '/admin/revoke',
+        component: AdminRevoke,
+    },
+    {
+        path: '/admin/accountmanagement',
+        component: AccountManagement,
+    },
+    {
+        path: '/admin/statics',
+        component: AdminStatics,
     },
 ];
 export const homeRoutes = [
@@ -54,4 +85,31 @@ export const homeRoutes = [
         component: Revoke,
     },
 ];
+export const adminRoutes = [
+    {
+        path: '/admin',
+        component: Admin,
+    },
+    {
+        path: '/admin/productcategoryhome',
+        component: ProductCategoryHome,
+    },
+    {
+        path: '/admin/productcategory',
+        component: ProductCategory,
+    },
+    {
+        path: '/admin/revoke',
+        component: AdminRevoke,
+    },
+    {
+        path: '/admin/accountmanagement',
+        component: AccountManagement,
+    },
+    {
+        path: '/admin/statics',
+        component: AdminStatics,
+    },
+]
 export const privateRoutes = [];
+
