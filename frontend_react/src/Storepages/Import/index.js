@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
+let unique = []
 function Import() {
     const [stocks, setStocks] = useState('kho1');
     const [types, setTypes] = useState('Fx_580_pl');
-    const [amounts, setAmounts] = useState('');
-
+    const [amounts, setAmounts] = useState(50);
     const [datas, setDatas] = useState([]);
     const handleSubmit = () => {
         console.log(stocks);
@@ -20,9 +20,10 @@ function Import() {
             .then((res) => res.json())
             .then((datas) => {
                 setDatas(datas);
+                console.log(datas);
             });
     }, []);
-
+    unique = [...new Set(datas.map(data => data.type))]
     return (
         <div className={cx('wrapper')}>
             <Link to="/" className={cx('return')}>
@@ -36,17 +37,21 @@ function Import() {
                         <option value="kho3">Kho hàng 3</option>
                     </select>
                     <select className={cx('type')} onChange={(e) => setTypes(e.target.value)}>
-                        {datas.map((data, index) => (
-                            <option key={index} value={data.type}>
-                                {data.type}
+                    {unique.map((uni) => (
+                            <option key={uni} value={uni}>
+                                {uni}
                             </option>
                         ))}
                     </select>
-                    <input
-                        className={cx('input')}
-                        placeholder="nhập số lượng"
-                        onChange={(e) => setAmounts(e.target.value)}
-                    />
+                    <div className={cx('amount')}>
+                    <span>{amounts}</span>
+                        <input
+                            type="range"
+                            className={cx('input')}
+                            placeholder="nhập số lượng"
+                            onChange={(e) => setAmounts(e.target.value)}
+                        />
+                    </div>
                 </div>
                 <button className={cx('submit')} onClick={handleSubmit}>
                     Gửi yêu cầu

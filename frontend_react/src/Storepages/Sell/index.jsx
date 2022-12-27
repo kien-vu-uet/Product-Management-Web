@@ -20,7 +20,6 @@ function Sell() {
     };
     fetchData();
     const handleSubmit = async () => {
-        console.log('dat');
         let find = datas.find((x) => x.type === type);
         if (find) {
             alert('Thành công');
