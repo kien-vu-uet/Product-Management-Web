@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes, warrantyRoutes } from '~/routes';
 import { DefaultLayout } from '~/components/Layout';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LoginForm from './Login';
 
 
@@ -19,9 +19,32 @@ const warranty = {
     password: '123',
 };
 
-function App() {
 
+
+function App() {
+    const [postStatus, setPostStatus] = useState('');
     const [user, setUser] = useState({ username: '' });
+    
+    
+    useEffect(() => {
+        // POST request using fetch inside useEffect React hook
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password : '1234567' })
+        };
+        fetch('http://127.0.0.1:8000/home/users/kienvt', requestOptions)
+            .then(response => response.json())
+            .then(data => setPostStatus(data.accepted));
+    
+    // empty dependency array means this effect will only run once (like componentDidMount in classes)
+    }, []);
+
+    console.log(postStatus);
+
+
+
+
     const Login = (details) => {
         if (details.username === admin.username && details.password === admin.password) {
             console.log('admin');
@@ -111,7 +134,7 @@ function App() {
     return (
         <Router>
             <div className="App">
-                {render()}                
+                {render()}
             </div>
         </Router>
     );
