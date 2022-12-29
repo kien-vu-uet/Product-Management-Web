@@ -1,0 +1,40 @@
+.wrapper {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 0px 30px 0px 30px;
+    background: var(--hong);
+}
+.welcome {
+    margin-right: 20px;
+}
+.info {
+    display: flex;
+}
+.logout {
+    width: 60px;
+    border: 1px solid;
+    border-radius: 5px;
+    background: rgb(222, 222, 222);
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+        background: rgb(93, 92, 92);
+        color: white;
+    }
+}
+
+
+@media only screen and (max-width: 426px) {
+    .wrapper {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid black;
+        padding: 0px 10px 0px 10px;
+    }
+
+}
