@@ -11,7 +11,7 @@ function Header() {
                 <h3 className={cx('welcome')}>
                     Welcome, <span>store</span>
                 </h3>
-                <button className={cx('logout')}>Logout</button>
+                <button className={cx('logout')} Logout>Logout</button>
             </div>
         </header>
     );

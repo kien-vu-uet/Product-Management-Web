@@ -11,11 +11,11 @@ function NoticeStock() {
 
     return ( 
         <div className={cx('wrapper')}>
-            <Link to="/home/revoke" className={cx('return')}>
+            <Link to="/store/revoke" className={cx('return')}>
                 Return
             </Link>
             <div className={cx('container')}>
-                     <h1></h1>
+                
             </div>
         </div>
     );
