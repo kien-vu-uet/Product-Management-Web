@@ -24,7 +24,7 @@ function AccountManagement() {
     return (
         <div className={cx('wrapper')}>
             <button className={cx('return')}>
-                <Link to="/admin">
+                <Link to="/">
                     <span className={cx('text_container')}>Return</span>
                 </Link>
             </button>

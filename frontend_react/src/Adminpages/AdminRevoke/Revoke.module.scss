@@ -6,7 +6,6 @@
     height: 70vh;
     flex-direction: column;
 }
-
 .container {
     height: 300px;
     display: flex;
@@ -20,35 +19,13 @@
     padding: 20px;
     border-radius: 5px;
 }
-.function {
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.button {
-    margin: 10px;
-    padding: 20px;
-    width: 90%;
-    border-radius: 5px;
-    border: 1px solid;
-    &:hover {
-        cursor: pointer;
-        transform: scale(1.05);
-        background: rgb(93, 92, 92);
-        color: white;
-    }
-}
-
-.sort_filter {
-    display: flex;
-    flex-direction: row;
-}
 
 .return {
+    margin-bottom: 20px;
     background: #f0f0f0;
     text-align: center;
     width: 70px;
+    padding: 5px;
     border: 2px solid black;
     border-radius: 5px;
     margin-left: 6rem;
@@ -60,25 +37,45 @@
     }
 }
 
+.submit {
+    margin-bottom: 20px;
+    background: #f0f0f0;
+    text-align: center;
+    width: 25%;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 5px;
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+        background: rgb(93, 92, 92);
+        color: white;
+    }
+
+}
+
+.product_code {
+    padding: 5px;
+    width: 50%;
+    margin: 20px;
+    text-align: center;
+}
 @media only screen and (max-width: 426px) {
     .return {
         background: #f0f0f0;
         text-align: center;
         width: 70px;
-        padding: 5px;
         border: 2px solid black;
         border-radius: 5px;
         margin-left: 20px;
     }
-    .button {
-        display: flex;
-        align-items: center;
-        min-height: 90px;
-        margin: 10px;
-        padding: 20px;
-        width: 90%;
+    .submit {
+        background: #f0f0f0;
+        text-align: center;
+        width: 50%;
+        padding: 7px;
+        border: 2px solid black;
         border-radius: 5px;
-        border: 1px solid;
         &:hover {
             cursor: pointer;
             transform: scale(1.05);
@@ -88,4 +85,3 @@
     }
 
 }
-

@@ -1,14 +1,15 @@
 import classNames from 'classnames/bind';
-import styles from './Import.module.scss';
+import styles from './Create.module.scss';
 import React from 'react';
 import { useEffect, useState, useMemo } from 'react';
 
 import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
-function Import() {
+function Create() {
     const [productCode, setProductCode] = useState('');
-    const [quantity, setQuantity] = useState(0);
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState(0)
 
     const [datas, setDatas] = useState([]);
     let uniqueType = [...new Set(datas.map((data) => data.type))];
@@ -27,7 +28,7 @@ function Import() {
     console.log(uniqueType);
     const handleSubmit = () => {
         if (uniqueType.find((element) => element === productCode) != -1) {
-            alert(`Đã nhập thành công ${quantity} sản phẩm: ${productCode}`);
+            alert(`Đã tạo thành công ${name} có mã sản phẩm: ${productCode} có đơn giá: ${price}`);
             console.log(productCode);
         }
     };
@@ -51,22 +52,31 @@ function Import() {
                             onChange={(e) => setProductCode(e.target.value)}
                         />
                     </div>
-                    <div className={cx('import_quantity')}>
-                        <span className={cx('title')}>Nhập số lượng</span>
+                    <div className={cx('product_name')}>
+                        <span className={cx('title')}>Nhập tên sản phẩm</span>
                         <input
                             type="text"
-                            className={cx('quantity')}
-                            placeholder="Nhập số lượng"
-                            onChange={(e) => setQuantity(e.target.value)}
+                            className={cx('input_product_name')}
+                            placeholder="Nhập tên sản phẩm"
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <div className={cx('product_price')}>
+                        <span className={cx('title')}>Nhập giá sản phẩm</span>
+                        <input
+                            type="text"
+                            className={cx('input_product_price')}
+                            placeholder="Nhập tên sản phẩm"
+                            onChange={(e) => setPrice(e.target.value)}
                         />
                     </div>
                 </div>
                 <button className={cx('submit')} onClick={handleSubmit}>
-                    <span className={cx('text_container')}>Nhập sản phẩm</span>
+                    <span className={cx('text_container')}>Tạo sản phẩm</span>
                 </button>
             </div>
         </div>
     );
 }
 
-export default Import;
+export default Create;
