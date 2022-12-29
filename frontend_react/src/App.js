@@ -33,7 +33,7 @@ function App() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ password : '1234567' })
         };
-        fetch('http://127.0.0.1:8000/home/users/kienvt', requestOptions)
+        fetch('http://127.0.0.1:8000/home/users/kienvt/', requestOptions)
             .then(response => response.json())
             .then(data => setPostStatus(data.accepted));
     

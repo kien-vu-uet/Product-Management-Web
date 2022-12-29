@@ -1,0 +1,6 @@
+cd backend_django
+
+venv\Scripts\activate # windows
+source venv/bin/activate # ubuntu
+
+python manage.py runserver

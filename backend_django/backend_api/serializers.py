@@ -4,7 +4,7 @@ from .models import *
 class UserAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserAccount
-        fields = "__all__"
+        fields = ('username', 'role')
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -56,12 +56,22 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = '__all__'
 
-class OrderDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = OrderDetail
-        fields = '__all__'
-
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
+        fields = '__all__'
+
+class RecallClaimSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RecallClaim
+        fields = '__all__'
+
+class BackClaimSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BackClaim
+        fields = '__all__'
+
+class SessionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Session
         fields = '__all__'
