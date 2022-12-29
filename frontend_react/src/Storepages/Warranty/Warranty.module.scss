@@ -67,3 +67,29 @@
         color: white;
     }
 }
+
+
+
+
+@media only screen and (max-width: 426px) {
+    .return {
+        background: #f0f0f0;
+        text-align: center;
+        width: 70px;
+        border: 2px solid black;
+        border-radius: 5px;
+        margin-left: 20px;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        margin: auto;
+        border: 1px solid;
+        padding: 20px;
+        border-radius: 5px;
+    }
+}
+

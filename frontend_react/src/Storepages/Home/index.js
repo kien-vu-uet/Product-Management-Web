@@ -8,19 +8,20 @@ function Home() {
     return (
         <div className={cx('container')}>
             <div className={cx('function')}>
-                <Link className={cx('button')} to="home/check">
+                <Link className={cx('button')} to="store/check">
                     Kiểm tra sản phẩm
                 </Link>
-                <Link className={cx('button')} to="home/import">
+
+                    <Link className={cx('button')} to="store/import">
                     Yêu cầu nhập hàng
                 </Link>
-                <Link className={cx('button')} to="home/warranty">
+                <Link className={cx('button')} to="store/warranty">
                     Trung tâm bảo hành
                 </Link>
-                <Link className={cx('button')} to="home/sell">
+                <Link className={cx('button')} to="store/sell">
                     Bán hàng
                 </Link>
-                <Link className={cx('button')} to="home/revoke">
+                <Link className={cx('button')} to="store/revoke">
                     Triệu hồi
                 </Link>
             </div>

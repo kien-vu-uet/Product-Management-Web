@@ -5,53 +5,56 @@ import Home from '~/Storepages/Home';
 import Warranty from '~/Storepages/Warranty';
 import Sell from '~/Storepages/Sell';
 import Revoke from '~/Storepages/Revoke';
+import NoticeCustomer from '~/Storepages/NoticeCustomer';
+import NoticeStock from '~/Storepages/NoticeStock';
+import WarrantyHome from '~/Warrantypages/WarrantyHome';
+import WarrantyStatistic from '~/Warrantypages/WarrantyStatistic';
+import WarrantyReceive from '~/Warrantypages/WarrantyReceive';
 
 export const publicRoutes = [
     {
-        path: '',
+        path: '/',
         component: Home,
     },
     {
-        path: '/home/check',
+        path: '/store/check',
         component: CheckProduct,
     },
     {
-        path: '/home/import',
+        path: '/store/import',
         component: Import,
     },
     {
-        path: '/home/warranty',
+        path: '/store/warranty',
         component: Warranty,
     },
     {
-        path: '/home/sell',
+        path: '/store/sell',
         component: Sell,
     },
     {
-        path: '/home/revoke',
+        path: '/store/revoke',
         component: Revoke,
     },
-];
-export const homeRoutes = [
     {
-        path: '/home/check',
-        component: CheckProduct,
+        path: '/store/revoke/customer',
+        component: NoticeCustomer,
     },
     {
-        path: '/home/import',
-        component: Import,
-    },
-    {
-        path: '/home/warranty',
-        component: Warranty,
-    },
-    {
-        path: '/home/sell',
-        component: Sell,
-    },
-    {
-        path: '/home/revoke',
-        component: Revoke,
+        path: '/store/revoke/stock',
+        component: NoticeStock,
     },
 ];
+export const warrantyRoutes = [
+    {
+        path: '/',
+        component: WarrantyHome,
+    },
+    { path: '/warranty/bill', component:WarrantyReceive },
+    {
+        path: '/warranty/statistic',
+        component: WarrantyStatistic,
+    },
+];
+
 export const privateRoutes = [];

@@ -11,8 +11,8 @@ function Revoke() {
                 Return
             </Link>
             <div className={cx('container')}>
-                <Link className={cx('cutomer')} to='/customer'>Khách hàng</Link>
-                <Link className={cx('stock')} to='/stock'>Stock</Link>
+                <Link className={cx('cutomer')} to='/store/revoke/customer'>Khách hàng</Link>
+                <Link className={cx('stock')} to='/store/revoke/stock'>Stock</Link>
             </div>
         </div>
     );
