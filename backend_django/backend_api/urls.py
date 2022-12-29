@@ -2,9 +2,12 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    # path('users/', views.get_all_accounts, name='get_users'),
+    path('users/', views.get_all_accounts, name='get_users'),
     path('users/new/', views.add_account),
     path('users/<str:pk>/', views.update_account),
+
+    path('sessions/', views.check_session),
+    # path('sessions/new/', views.add_account),
 
     path('customers/', views.get_all_customers),
     path('customers/new/', views.add_customer),
@@ -33,5 +36,14 @@ urlpatterns = [
 
     path('warehouse/', views.get_all_warehousing),
     path('warehouse/news/', views.add_warehousing),
-    path('warehouse/export/', views.move_product)
+    path('warehouse/export/', views.move_product),
+
+
+    path('warrantyclaims/', views.get_all_warranty_claims),
+    path('warrantyclaims/new/', views.add_warranty_claim),
+    path('warrantyclaims/<int:pk>/', views.update_warranty_claim),
+
+    path('bills/', views.get_all_bills),
+    path('bills/news/', views.add_bill),
+    path('bills/<int:pk>', views.update_bill),
 ]

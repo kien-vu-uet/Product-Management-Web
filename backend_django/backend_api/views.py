@@ -78,31 +78,49 @@ def add_account(request):
     except:
         return Response('Invalid input', HTTP_400_BAD_REQUEST)
 
-@api_view(['POST', 'PUT', 'DELETE'])
+@api_view(['POST', 'DELETE'])
 def update_account(request, pk):
     try:
         account = UserAccount.objects.get(username=pk)
         if request.method=='POST':
             response = {
-                "accepted" : False
+                "accepted" : False,
             }
             data = request.data
             try: 
                 if data['password'] == account.password:
                     response['accepted'] = True
+                # session = Session.objects.create(
+                #     user = account,
+                # )
+                # response['session'] = session.id
                 return Response(response, HTTP_200_OK)
             except:
                 return Response('Required password', HTTP_400_BAD_REQUEST)
-
-        elif request.method=='PUT':
-            serializer = UserAccountSerializer(account, data=request.data)
-            if not serializer.is_valid():
-                return Response('Failed', status=HTTP_400_BAD_REQUEST)
-            serializer.save()
-            return Response(serializer.data, HTTP_200_OK)
         elif request.method=='DELETE':
             account.delete()
             return Response('Deleted', HTTP_200_OK)
+    except:
+        return Response('Invalid id', HTTP_400_BAD_REQUEST)
+
+'''
+For check session 
+'''
+
+
+@api_view(['POST'])
+def check_session(request):
+    from django.utils import timezone
+    try:
+        pk = request.data['session']
+        session = Session.objects.get(id=pk)
+        now = timezone.now()
+        then = session.init_time
+        diff = (now - then).min
+        if diff >= session.time_limit:
+            return Response({'session_end' : True}, HTTP_200_OK)
+        else:
+            return Response({'session_end' : False}, HTTP_200_OK)
     except:
         return Response('Invalid id', HTTP_400_BAD_REQUEST)
 
@@ -483,7 +501,7 @@ def add_warranty_claim(request):
         return Response('Invalid input', HTTP_400_BAD_REQUEST)
 
 @api_view(['PUT', 'DELETE', 'GET'])
-def update_claim(request, pk):
+def update_warranty_claim(request, pk):
     try:
         if request.method == 'GET':
             claim = WarrantyClaim.objects.get(id=pk)
