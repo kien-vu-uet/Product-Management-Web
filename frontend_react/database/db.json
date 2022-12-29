@@ -1,0 +1,157 @@
+{
+    "product": [
+        {
+            "id": 10000,
+            "type": "Fx_580_pl",
+            "name": "Máy tính FX-580 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": null,
+            "status": "Kho"
+        },
+        {
+            "id": 10001,
+            "type": "Fx_580_pl",
+            "name": "Máy tính FX-580 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": null,
+            "status": "Kho"
+        },
+        {
+            "id": 10002,
+            "type": "Fx_580_pl",
+            "name": "Máy tính FX-580 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": null,
+            "status": "Kho"
+        },
+        {
+            "id": 10003,
+            "type": "Fx_580_pl",
+            "name": "Máy tính FX-580 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": null,
+            "status": "Kho"
+        },
+        {
+            "id": 10004,
+            "type": "Fx_580_pl",
+            "name": "Máy tính FX-580 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": null,
+            "status": "Kho"
+        },
+        {
+            "id": 10005,
+            "type": "Fx_580_pl",
+            "name": "Máy tính FX-580 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": null,
+            "status": "Kho"
+        },
+        {
+            "id": 10006,
+            "type": "Fx_580_pl",
+            "name": "Máy tính FX-580 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": null,
+            "status": "Kho"
+        },
+        {
+            "id": 10007,
+            "type": "Fx_580_pl",
+            "name": "Máy tính FX-580 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": null,
+            "status": "Kho"
+        },
+        {
+            "id": 10008,
+            "type": "Fx_560_pl",
+            "name": "Máy tính FX-560 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": "10/12/2022",
+            "status": "Đang bảo hành"
+        },
+        {
+            "id": 10009,
+            "type": "Fx_560_pl",
+            "name": "Máy tính FX-560 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": null,
+            "status": "Kho"
+        },
+        {
+            "id": 10010,
+            "type": "Fx_560_pl",
+            "name": "Máy tính FX-560 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": "10/12/2022",
+            "status": "Đã bán"
+        },
+        {
+            "id": 10010,
+            "type": "Fx_560_pl",
+            "name": "Máy tính FX-560 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": "10/12/2022",
+            "status": "Đã bán"
+        },
+        {
+            "id": 10010,
+            "type": "Fx_560_pl",
+            "name": "Máy tính FX-560 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": "10/12/2022",
+            "status": "Đã bán"
+        },
+        {
+            "id": 10010,
+            "type": "Fx_560_pl",
+            "name": "Máy tính FX-560 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": "10/12/2022",
+            "status": "Đã bán"
+        },
+        {
+            "id": 10010,
+            "type": "Fx_580_pl",
+            "name": "Máy tính FX-580 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": "10/12/2022",
+            "status": "Đã bán"
+        },
+        {
+            "id": 10010,
+            "type": "Fx_580_pl",
+            "name": "Máy tính FX-580 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": "10/12/2022",
+            "status": "Đã bán"
+        },
+        {
+            "id": 10010,
+            "type": "Fx_580_pl",
+            "name": "Máy tính FX-580 Plus 2022",
+            "price": "500000",
+            "import_date": "20/07/2021",
+            "sell_date": "10/12/2022",
+            "status": "Đã bán"
+        }
+    ]
+}
