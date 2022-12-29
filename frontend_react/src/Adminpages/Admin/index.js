@@ -10,7 +10,7 @@ function Admin() {
             <div className={cx('container')}>
                 <div className={cx('function')}>
                     <Link className={cx('button')} to="/admin/productcategoryhome">
-                        Quản lý danh mục sản phẩm
+                        Danh mục sản phẩm
                     </Link>
                     <Link className={cx('button')} to="/admin/accountmanagement">
                         Cấp tài khoản

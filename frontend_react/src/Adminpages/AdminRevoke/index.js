@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 
-function Revoke() {
+function AdminRevoke() {
     const [productCode, setProductCode] = useState('');
     
     const [datas, setDatas] = useState([]);
@@ -36,11 +36,9 @@ function Revoke() {
 
     return (
         <div className={cx('wrapper')}>
-            <button className={cx('return')}>
-                <Link to="/admin">
+                <Link to="/" className={cx('return')}>
                     <span className={cx('text_container')}>Return</span>
                 </Link>
-            </button>
 
             <div className={cx('container')}>
                 <div className={cx('revoke')}>
@@ -60,4 +58,4 @@ function Revoke() {
     );
 }
 
-export default Revoke;
+export default AdminRevoke;

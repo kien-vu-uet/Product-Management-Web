@@ -43,34 +43,38 @@
     color: #fff;
 }
 
-.revoke {
+.import {
     position: absolute;
     display: flex;
     flex-direction: column;
-    top: 25%;
+    flex-wrap: wrap;
+    top: 15%;
     justify-content: center;
     align-items: center;
     justify-content: space-between;
 }
 
-.title {
-    margin: 10px;
+.import_product_code,
+.import_quantity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: content-box;
+    min-width: 100%;
 }
 
-.revoke input {
-    padding: 10px;
-    min-width: 200px;
-    border-radius: 5px;
-    border: 1px solid lightgray;
-    &:focus {
-        border-radius: 5px;
-        border: 1px solid #f5ebeb;
-    }
+.title {
+   display: block;
+}
+
+.import input{
+    margin: 10px 10px;
+    width: 90%;
 }
 
 .submit {
     position: absolute;
-    top: 60%;
+    bottom: 20%;
     padding: 8px 12px;
     border-radius: 5px;
     background-color: #736cd6;
