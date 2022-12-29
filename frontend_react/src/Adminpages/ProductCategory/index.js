@@ -1,6 +1,8 @@
 import classNames from 'classnames/bind';
 import styles from './ProductCategory.module.scss';
-import { useEffect, useState } from 'react';
+import React from 'react';
+import { useEffect, useState, useMemo } from 'react';
+
 import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
@@ -28,7 +30,12 @@ function ProductCategory() {
             });
         }
     };
-    let unique = [...new Set(datas.map((data) => data.type))];
+    let uniqueType = [...new Set(datas.map((data) => data.type))];
+    let uniqueStatus = [...new Set(datas.map((data) => data.status))];
+
+    const [stocks, setStocks] = useState('kho1');
+    const [types, setTypes] = useState('Fx_580_pl');
+
 
     return (
         <div className={cx('wrapper')}>
@@ -37,12 +44,22 @@ function ProductCategory() {
                     <span className={cx('text_container')}>Return</span>
                 </Link>
             </button>
-            
+
             <div className={cx('container')}>
                 <table className={cx('table')} border="1">
                     <thead>
                         <tr>
-                            <th>Dòng máy</th>
+                            <th>
+                                <div>
+                                    <select className={cx('type')} onChange={(e) => setTypes(e.target.value)}>
+                                        {uniqueType.map((uni) => (
+                                            <option key={uni} value={uni}>
+                                                {uni}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            </th>
                             <th>Tên máy</th>
                             <th>Số lượng</th>
                             <th>Giá tiền</th>
@@ -55,7 +72,7 @@ function ProductCategory() {
                                 <th>{data.type}</th>
                                 <th>{data.name}</th>
                                 <th>{data.price}</th>
-                                <th>{data.import_date}</th>
+                                <th>{data.price}</th>
                                 <th>{data.status}</th>
                             </tr>
                         ))}
@@ -65,5 +82,6 @@ function ProductCategory() {
         </div>
     );
 }
+
 
 export default ProductCategory;
