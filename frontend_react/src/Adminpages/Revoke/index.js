@@ -28,8 +28,6 @@ function Revoke() {
         if (uniqueType.find(element => element === productCode) != -1) {
             alert(`Đã tạo yêu cầu thu hồi thành công cho mã sản phẩm: ${productCode}`);
             console.log(productCode);
-            // console.log(username);
-            // console.log(password);
         }
     };
 
