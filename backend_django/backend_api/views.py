@@ -95,6 +95,8 @@ def update_account(request, pk):
                     user = account,
                 )
                 response['session'] = session.id
+                response['username'] = account.username
+                response['role'] = account.role
                 return Response(response, HTTP_200_OK)
             except:
                 return Response('Required password', HTTP_400_BAD_REQUEST)
