@@ -1,3 +1,4 @@
 __pycache__/
 .vscode
 /frontend_react/node_modules
+/backend_django/venv
