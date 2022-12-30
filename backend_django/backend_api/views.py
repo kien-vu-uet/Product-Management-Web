@@ -65,14 +65,15 @@ def get_all_accounts(request):
 @api_view(['POST'])
 def add_account(request):
     try:
-        serializer = UserAccountSerializer(data=request.data)
-        if not serializer.is_valid():
-            return Response('Failed', HTTP_400_BAD_REQUEST)
+        # serializer = UserAccountSerializer(data=request.data)
+        # if not serializer.is_valid():
+        #     return Response('Failed', HTTP_400_BAD_REQUEST)
         account = UserAccount.objects.create(
-            username=serializer.data['username'],
-            password=serializer.data['password'],
-            role=serializer.data['role']
+            username=request.data['username'],
+            password=request.data['password'],
+            role=request.data['role']
         )
+        serializer = UserAccountSerializer(account, many=False)
         account.save()
         return Response(serializer.data, HTTP_201_CREATED)
     except:
@@ -90,10 +91,10 @@ def update_account(request, pk):
             try: 
                 if data['password'] == account.password:
                     response['accepted'] = True
-                # session = Session.objects.create(
-                #     user = account,
-                # )
-                # response['session'] = session.id
+                session = Session.objects.create(
+                    user = account,
+                )
+                response['session'] = session.id
                 return Response(response, HTTP_200_OK)
             except:
                 return Response('Required password', HTTP_400_BAD_REQUEST)
@@ -106,8 +107,6 @@ def update_account(request, pk):
 '''
 For check session 
 '''
-
-
 @api_view(['POST'])
 def check_session(request):
     from django.utils import timezone
@@ -116,8 +115,10 @@ def check_session(request):
         session = Session.objects.get(id=pk)
         now = timezone.now()
         then = session.init_time
-        diff = (now - then).min
-        if diff >= session.time_limit:
+        diff = (now - then).seconds
+        if diff >= session.time_limit * 60:
+            session.status = 'Ngoại tuyến'
+            session.save()
             return Response({'session_end' : True}, HTTP_200_OK)
         else:
             return Response({'session_end' : False}, HTTP_200_OK)
@@ -338,7 +339,7 @@ def get_all_warranty_centers(request):
     return Response(serializer.data)
 
 @api_view(['POST'])
-def add_warrantycenter(request):
+def add_warranty_center(request):
     try:
         serializer = WarrantyCenterSerializer(data=request.data)
         if not serializer.is_valid():
@@ -354,7 +355,7 @@ def add_warrantycenter(request):
         return Response('Invalid input', status=HTTP_400_BAD_REQUEST)
 
 @api_view(['PUT', 'DELETE', 'GET'])
-def update_warrantycenter(request, pk):
+def update_warranty_center(request, pk):
     try:
         warrantycenter = WarrantyCenter.objects.get(id=pk)
         if request.method == 'PUT':
@@ -406,14 +407,32 @@ def add_warehousing(request):
     except:
         return Response('Invalid input', HTTP_400_BAD_REQUEST)
 
-@api_view(['POST'])
-def move_product(request):
-    try:
-        data = request.data
-
-    except:
-        return Response('Invalid input', HTTP_400_BAD_REQUEST)
-
+@api_view(['GET'])
+def get_all_quantity_in_factory(request):
+    factories = Factory.objects.all()
+    total = []
+    for factory in factories:
+        warehousings = Warehouse.objects.filter(factory=factory)
+        quantity = {}
+        for warehousing in warehousings:
+            product = warehousing.product
+            category = product.category
+            if category.id not in quantity:
+                quantity[category.id] = 1
+            else:
+                quantity[category.id] += 1
+        inventory = {}
+        for id in list(quantity.keys()):
+            category = Category.objects.get(id=id)
+            cat_serializer = CategorySerializer(category, many=False)
+            cat_data = cat_serializer.data
+            cat_data['quantity'] = quantity[id]
+            inventory[id] = cat_data
+        serializer = FactorySerializer(factory, many=False)
+        total_each = serializer.data
+        total_each['inventory'] = inventory
+        total.append(total_each)
+    return Response(total, HTTP_200_OK)
 
 '''
 For stock
@@ -424,9 +443,25 @@ def get_all_stocking(request):
     serializer = StockSerializer(stocking, many=True)
     return Response(serializer.data, HTTP_200_OK)
 
-@api_view(['POST'])
-def add_stocking(request):
-    pass
+@api_view(['GET'])
+def get_all_quantity_in_store(request):
+    stores = Store.objects.all()
+    total = []
+    for store in stores:
+        stocks = Stock.objects.filter(store=store)
+        quantity = {}
+        for stock in stocks:
+            product = stock.product
+            category = product.category
+            if category.name not in quantity:
+                quantity[category.name] = 1
+            else:
+                quantity[category.name] += 1
+        serializer = StockSerializer(stock, many=False)
+        total_each = serializer.data
+        total_each['quantity'] = quantity
+        total.append(total_each)
+    return Response(total, HTTP_200_OK)
 
 
 '''
@@ -440,10 +475,10 @@ def get_all_bills(request):
 
 @api_view(['POST'])
 def add_bill(request):
-    try:
+    # try:
         data = request.data
         store = Store.objects.get(id=data['store'])
-        customer = Store.objects.get(id=data['customer'])
+        customer = Customer.objects.get(id=data['customer'])
         product = Product.objects.get(id=data['product'])
         bill = Bill.objects.create(
             store=store,
@@ -452,10 +487,10 @@ def add_bill(request):
         )
         serializer = BillSerializer(bill, many=False)
         return Response(serializer.data, HTTP_201_CREATED)
-    except:
+    # except:
         return Response('Invalid input', HTTP_400_BAD_REQUEST)
 
-@api_view(['PUT', 'DELETE', 'GET'])
+@api_view(['DELETE', 'GET'])
 def update_bill(request, pk):
     try:
         if request.method == 'DELELTE':
@@ -466,15 +501,18 @@ def update_bill(request, pk):
             bill = Bill.objects.get(id=pk)
             serializer = BillSerializer(bill, many=False)
             return Response(serializer.data, HTTP_200_OK)
-        elif request.method == 'PUT':
-            bill = Bill.objects.get(id=pk)
-            bill.status = request.data['status']
-            bill.save()
-            serializer = BillSerializer(bill, many=False)
-            return Response(serializer.data, HTTP_200_OK)
     except:
         return Response('Invalid id', HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+def get_bill_by_store(request, pk):
+    try:
+        store = Store.objects.get(id=pk)
+        bills = Bill.objects.filter(store=store)
+        serializer = BillSerializer(bills, many=True)
+        return Response(serializer.data, HTTP_200_OK)
+    except:
+        return Response('Invalid id', HTTP_400_BAD_REQUEST)
 
 '''
 For warranty claim
@@ -519,3 +557,201 @@ def update_warranty_claim(request, pk):
             return Response(serializer.data, HTTP_200_OK)
     except:
         return Response('Invalid id', HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def move_product_back(request, pk):
+    try:
+        claim = WarrantyClaim.objects.get(id=pk)
+        claim.status = 'Đã trả về nhà máy'
+        bill = claim.bill
+        product = bill.product
+        product.status = 'Đã tiêu huỷ'
+        product.save()
+        serializer = ProductSerializer(product, many=False)
+        return Response(serializer.data, HTTP_200_OK)
+    except:
+        return Response('Invalid id', HTTP_400_BAD_REQUEST)
+
+'''
+For order
+'''
+@api_view(['GET'])
+def get_all_orders(request):
+    orders = Order.objects.all()
+    serializers = OrderSerializer(orders, many=True)
+    return Response(serializers.data, HTTP_200_OK)
+
+@api_view(['POST'])
+def add_order(request):
+    data = request.data
+    try:
+        store = Store.objects.get(id=data['store'])
+        factory = Factory.objects.get(id=data['factory'])
+        category = Category.objects.get(id=data['category'])
+        order = Order.objects.create(
+            store=store,
+            factory=factory,
+            category=category,
+            quantity=data['quantity']
+        )
+        warehousing = Warehouse.objects.filter(factory=factory)
+        serializer = OrderSerializer(order, many=False)
+        return Response(serializer.data, HTTP_201_CREATED)
+    except:
+        return Response('Invalid input', HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE', 'GET'])
+def update_order(request, pk):
+    try:
+        if request.method=='GET':
+            order = Order.objects.get(id=pk)
+            serializer = OrderSerializer(order, many=False)
+            return Response(serializer.data, HTTP_200_OK)
+        elif request.method=='DELETE':
+            order = Order.objects.get(id=pk)
+            order.delete()
+            return Response('Deleted', HTTP_200_OK)
+    except:
+        return Response('Invalid id', HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def order_move(request, pk):
+    try:
+        order = Order.objects.get(id=pk)
+        store = order.store
+        quantity = order.quantity
+        category = order.category
+        factory = order.factory
+        for i in quantity:
+            warehousings = Warehouse.objects.filter(factory=factory)
+            supplies = []
+            for i in range(warehousings.__len__):
+                warehousing = warehousings[i]
+                product = warehousing.product
+                if category.id == product.category.id:
+                    stocking = Stock.objects.create(
+                        store=store,
+                        product=product
+                    )
+                    warehousing.delete()
+                    serializer = StockSerializer(stocking, many=False)
+                    supplies.append(serializer.data)          
+    except:
+        return Response('Invalid id', HTTP_400_BAD_REQUEST)
+
+
+'''
+For recall claim
+'''
+@api_view(['GET'])
+def get_all_recall_claim(request):
+    claim = RecallClaim.objects.all()
+    serializers = RecallClaimSerializer(claim, many=True)
+    return Response(serializers.data, HTTP_200_OK)
+
+@api_view(['POST'])
+def add_recall_claim(request):
+    try:
+        data = request.data
+        category = Category.objects.get(id=data['category'])
+        claim = RecallClaim.objects.create(
+            category=category,
+            reason=data['reason']
+        )
+        products = Product.objects.filter(category=category)
+        for product in products:
+            product.status = 'Lỗi'
+            product.save()
+        serializer = RecallClaimSerializer(claim, many=False)
+        return Response(serializer.data, HTTP_201_CREATED)
+    except:
+        return Response('Invalid input', HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'POST', 'DELETE'])
+def get_recall_claim(request, pk):
+    try:
+        if request.method == 'GET':
+            claim = RecallClaim.objects.get(id=pk)
+            serializer = RecallClaimSerializer(claim, many=False)
+            return Response(serializer.data, HTTP_200_OK)
+        elif request.method == 'POST':
+            data = request.data
+            claim = RecallClaim.objects.get(id=pk)
+            category = claim.category
+            product = Product.objects.get(id=data['product'])
+            if product.category.id != category.id:
+                return Response('Product is not in recall list', HTTP_200_OK)
+            else:
+                bill = Bill.objects.get(product=product)
+                store = bill.store
+                stocking = Stock.objects.create(
+                    store=store,
+                    product=product
+                )
+                serializer = StockSerializer(stocking, many=False)
+                return Response(serializer.data, HTTP_200_OK)
+        elif request.method == 'DELETE':
+            claim = RecallClaim.objects.get(id=pk)
+            category = claim.category
+            products = Product.objects.filter(category=category)
+            for product in products:
+                product.status = 'Bình thường'
+                product.save()
+            claim.delete()
+            return Response('Deleted', HTTP_200_OK)
+    except:
+        return Response('Invalid id', HTTP_400_BAD_REQUEST)
+
+'''
+For back claim
+'''
+@api_view(['GET'])
+def get_all_back_claim(request):
+    claim = BackClaim.objects.all()
+    serializers = BackClaimSerializer(claim, many=True)
+    return Response(serializers.data, HTTP_200_OK)
+
+@api_view(['POST'])
+def add_back_claim(request):
+    try:
+        data = request.data
+        store = Store.objects.get(id=data['store'])
+        product = Product.objects.get(id=data['product'])
+        claim = BackClaim.objects.create(
+            store=store,
+            product=product
+        )
+        serializer = BackClaimSerializer(claim, many=False)
+        return Response(serializer.data, HTTP_201_CREATED)
+    except:
+        return Response('Invalid input', HTTP_400_BAD_REQUEST)
+
+@api_view(['POST', 'GET', 'DELETE'])
+def get_back_claim(request, pk):
+    try:
+        if request.method=='GET':
+            claim = BackClaim.objects.get(id=pk)
+            serializer = BackClaimSerializer(claim, many=False)
+            return Response(serializer.data, HTTP_200_OK)
+        elif request.method=='POST':
+            claim = BackClaim.objects.get(id=pk)
+            product = claim.product
+            category = product.category
+            stocking = Stock.objects.get(product=product)
+            store = stocking.store
+            order = Order.objects.get(store=store, category=category)
+            factory = order.factory
+            
+            warehouse = Warehouse.objects.create(
+                factory=factory,
+                product=product
+            )
+            serializer = WarehouseSerializer(warehouse, many=False)
+            stocking.delete()
+            return Response(serializer.data, HTTP_200_OK)
+        elif request.method == 'DELETE':
+            claim = BackClaim.objects.get(id=pk)
+            claim.delete()
+            return Response('Deleted', HTTP_200_OK)
+    except:
+        return Response('Invalid input', HTTP_400_BAD_REQUEST)
