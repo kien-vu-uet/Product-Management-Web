@@ -2,12 +2,12 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    // align-items: center;
     margin-top: 15px;
     height: 50vh;
-    flex-direction: column;
 }
 .container {
-    height: 300px;
+    min-height: 300px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -21,6 +21,7 @@
 }
 
 .return {
+    height: 30px;
     margin-bottom: 20px;
     background: #f0f0f0;
     text-align: center;
@@ -34,6 +35,28 @@
         background: rgb(93, 92, 92);
         color: white;
     }
+}
+
+.export {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.export_function {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.export_function select,
+.export_function input {
+    height: 30px;
+    width: 70%;
+    margin: 0 10px;
 }
 
 .submit {
@@ -50,17 +73,43 @@
         background: rgb(93, 92, 92);
         color: white;
     }
-
 }
 
-.product_code {
-    padding: 5px;
-    width: 50%;
+.export_request {
+    height: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    box-sizing: border-box;
     margin: 20px;
-    text-align: center;
 }
 
 @media only screen and (max-width: 426px) {
+    .wrapper {
+        flex-direction: column;
+    }
+    
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        flex-direction: column;
+    }
+    .export_request {
+        flex: 1 1;
+        height: 560px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: none;
+        margin-top: 20px;
+        border-top: 1px solid;
+    }
+
     .return {
         background: #f0f0f0;
         text-align: center;
@@ -68,6 +117,15 @@
         border: 2px solid black;
         border-radius: 5px;
         margin-left: 20px;
+    }
+    .export_function {
+        flex-direction: column;
+    }
+    .export_function select,
+    .export_function input {
+        height: 30px;
+        width: 80%;
+        margin: 10px 0;
     }
     .submit {
         background: #f0f0f0;

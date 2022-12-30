@@ -7,9 +7,9 @@ const cx = classNames.bind(styles);
 function ProductCategoryHome() {
     return (
         <div className={cx('wrapper')}>
-                <Link to="/" className={cx('return')}>
-                    <span className={cx('text_container')}>Return</span>
-                </Link>
+            <Link to="/" className={cx('return')}>
+                <span className={cx('text_container')}>Return</span>
+            </Link>
             <div className={cx('container')}>
                 <div className={cx('function')}>
                     <Link className={cx('button')} to="/admin/productcategory">
@@ -22,6 +22,7 @@ function ProductCategoryHome() {
             </div>
         </div>
     );
+    
 }
 
 export default ProductCategoryHome;

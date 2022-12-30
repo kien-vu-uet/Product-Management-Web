@@ -7,11 +7,10 @@ const cx = classNames.bind(styles);
 function ImportHome() {
     return (
         <div className={cx('wrapper')}>
-            <button className={cx('return')}>
-                <Link to="/manufacture">
-                    <span className={cx('text_container')}>Return</span>
-                </Link>
-            </button>
+            <Link className={cx('return')} to="/">
+                Return
+            </Link>
+
             <div className={cx('container')}>
                 <div className={cx('function')}>
                     <Link className={cx('button')} to="/manufacture/import">

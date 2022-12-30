@@ -23,6 +23,7 @@ import AccountManagement from '~/Adminpages/AccountManagement';
 import AdminStatics from '~/Adminpages/AdminStatics';
 import ManufactureHome from '~/Manufactures/ManufactureHome';
 import ImportHome from '~/Manufactures/ImportHome';
+import ManufactureImport from '~/Manufactures/Import';
 import Create from '~/Manufactures/Create';
 import Export from '~/Manufactures/Export';
 import DefectiveProduct from '~/Manufactures/DefectiveProduct';
@@ -114,7 +115,7 @@ export const manufactureRoutes = [
     },
     {
         path: '/manufacture/import',
-        component: Import,
+        component: ManufactureImport,
     },
     {
         path: '/manufacture/create',

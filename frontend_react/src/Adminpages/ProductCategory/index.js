@@ -2,7 +2,7 @@ import classNames from 'classnames/bind';
 import styles from './ProductCategory.module.scss';
 import React from 'react';
 import { useEffect, useState, useMemo } from 'react';
-
+import { TableFilter } from 'react-table-filter';
 import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
@@ -20,50 +20,30 @@ function ProductCategory() {
     useEffect(() => {
         fetchData();
     }, []);
-    const handleSearch = async (target) => {
-        await fetchData();
-        if (target.length !== 0) {
-            datas.map((data) => {
-                if (data.type === target) {
-                    product.push(data);
-                }
-            });
-        }
-    };
+    
     let uniqueType = [...new Set(datas.map((data) => data.type))];
     let uniqueStatus = [...new Set(datas.map((data) => data.status))];
 
     const [stocks, setStocks] = useState('kho1');
     const [types, setTypes] = useState('Fx_580_pl');
 
+    const columns = ['Mã sản phẩm', 'Tên máy', 'Giá tiền'];
 
     return (
         <div className={cx('wrapper')}>
-            <button className={cx('return')}>
-                <Link to="/admin/productcategoryhome">
-                    <span className={cx('text_container')}>Return</span>
-                </Link>
-            </button>
+            <Link className={cx('return')} to="/admin/productcategoryhome">
+                <span className={cx('text_container')}>Return</span>
+            </Link>
 
             <div className={cx('container')}>
                 <table className={cx('table')} border="1">
                     <thead>
                         <tr>
-                            <th>
-                                <div>
-                                    <select className={cx('type')} onChange={(e) => setTypes(e.target.value)}>
-                                        {uniqueType.map((uni) => (
-                                            <option key={uni} value={uni}>
-                                                {uni}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                            </th>
-                            <th>Tên máy</th>
-                            <th>Số lượng</th>
-                            <th>Giá tiền</th>
-                            <th>Trạng thái</th>
+                            {columns.map((uni) => (
+                                <th key={uni} value={uni}>
+                                    {uni}
+                                </th>
+                            ))}
                         </tr>
                     </thead>
                     <tbody>
@@ -72,8 +52,6 @@ function ProductCategory() {
                                 <th>{data.type}</th>
                                 <th>{data.name}</th>
                                 <th>{data.price}</th>
-                                <th>{data.price}</th>
-                                <th>{data.status}</th>
                             </tr>
                         ))}
                     </tbody>
@@ -82,6 +60,5 @@ function ProductCategory() {
         </div>
     );
 }
-
 
 export default ProductCategory;

@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 function Create() {
     const [productCode, setProductCode] = useState('');
     const [name, setName] = useState('');
-    const [price, setPrice] = useState(0)
+    const [price, setPrice] = useState(0);
 
     const [datas, setDatas] = useState([]);
     let uniqueType = [...new Set(datas.map((data) => data.type))];
@@ -28,18 +28,18 @@ function Create() {
     console.log(uniqueType);
     const handleSubmit = () => {
         if (uniqueType.find((element) => element === productCode) != -1) {
-            alert(`Đã tạo thành công ${name} có mã sản phẩm: ${productCode} có đơn giá: ${price}`);
-            console.log(productCode);
+            if (productCode.length != 0) {
+                alert(`Đã tạo thành công ${name} có mã sản phẩm: ${productCode} có đơn giá: ${price}`);
+                console.log(productCode);
+            }
         }
     };
 
     return (
         <div className={cx('wrapper')}>
-            <button className={cx('return')}>
-                <Link to="/manufacture/importhome">
-                    <span className={cx('text_container')}>Return</span>
-                </Link>
-            </button>
+            <Link className={cx('return')} to="/manufacture/importhome">
+                Return
+            </Link>
 
             <div className={cx('container')}>
                 <div className={cx('import')}>
@@ -72,7 +72,7 @@ function Create() {
                     </div>
                 </div>
                 <button className={cx('submit')} onClick={handleSubmit}>
-                    <span className={cx('text_container')}>Tạo sản phẩm</span>
+                    Tạo sản phẩm
                 </button>
             </div>
         </div>

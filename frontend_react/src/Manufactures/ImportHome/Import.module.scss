@@ -1,29 +1,27 @@
 .wrapper {
     width: 100%;
     display: flex;
-    justify-content: center;
     position: relative;
-    margin-top: 15px;
-    height: 405px;
+    justify-content: center;
+    padding-top: 15px;
     flex-direction: column;
 }
 
 .container {
-    height: 300px;
+    max-height: 335px;
     display: flex;
     position: relative;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    flex-direction: column;
-    width: 80%;
-    text-align: center;
+    width: 70%;
+    align-items: start;
     margin: auto;
-    padding: 20px;
-    border-radius: 5px;
 }
+
 .button {
+    text-align: center;
     display: block;
-    width: 50%;
+    width: 60%;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -49,23 +47,45 @@
 }
 
 .return {
-    position: absolute;
-    left: 65px;
-    top: 20px;
-    min-width: 80px;
-    padding: 5px 10px;
+    background: #f0f0f0;
+    text-align: center;
+    width: 70px;
+    border: 2px solid black;
     border-radius: 5px;
-    background-color: #736cd6;
-    border: none;
-    cursor: pointer;
+    margin-left: 6rem;
     &:hover {
-        opacity: 0.9;
+        cursor: pointer;
         transform: scale(1.05);
+        background: rgb(93, 92, 92);
+        color: white;
     }
 }
 
-.text_container {
-    font-weight: 400;
-    color: #fff;
-}
+@media only screen and (max-width: 426px) {
+    .return {
+        background: #f0f0f0;
+        text-align: center;
+        width: 70px;
+        padding: 5px;
+        border: 2px solid black;
+        border-radius: 5px;
+        margin-left: 20px;
+    }
+    .button {
+        display: flex;
+        align-items: center;
+        min-height: 90px;
+        margin: 10px;
+        padding: 20px;
+        width: 90%;
+        border-radius: 5px;
+        border: 1px solid;
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.05);
+            background: rgb(93, 92, 92);
+            color: white;
+        }
+    }
 
+}

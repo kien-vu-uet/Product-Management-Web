@@ -1,43 +1,44 @@
 .wrapper {
     width: 100%;
     display: flex;
+    position: relative;
     justify-content: center;
-    margin-top: 15px;
-    height: 70vh;
+    padding-top: 15px;
     flex-direction: column;
 }
 
 .container {
-    height: 300px;
+    max-height: 335px;
     display: flex;
-    justify-content: space-evenly;
+    position: relative;
+    justify-content: center;
     align-items: center;
-    flex-direction: column;
-    width: 80%;
-    text-align: center;
+    width: 70%;
+    align-items: start;
     margin: auto;
-    border: 1px solid;
-    padding: 20px;
+}
+
+.button {
+    text-align: center;
+    display: block;
+    width: 60%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
     border-radius: 5px;
+    margin: 15px;
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.02);
+    }
 }
 .function {
     width: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-.button {
-    margin: 10px;
-    padding: 20px;
-    width: 90%;
-    border-radius: 5px;
-    border: 1px solid;
-    &:hover {
-        cursor: pointer;
-        transform: scale(1.05);
-        background: rgb(93, 92, 92);
-        color: white;
-    }
 }
 
 .sort_filter {

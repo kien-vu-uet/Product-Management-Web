@@ -27,42 +27,39 @@ function Import() {
     console.log(uniqueType);
     const handleSubmit = () => {
         if (uniqueType.find((element) => element === productCode) != -1) {
-            alert(`Đã nhập thành công ${quantity} sản phẩm: ${productCode}`);
-            console.log(productCode);
+            if (productCode.length != 0) {
+                alert(`Đã nhập thành công ${quantity} sản phẩm: ${productCode}`);
+                console.log(productCode);
+            }
         }
     };
 
     return (
         <div className={cx('wrapper')}>
-            <button className={cx('return')}>
-                <Link to="/manufacture/importhome">
-                    <span className={cx('text_container')}>Return</span>
-                </Link>
-            </button>
+            <Link className={cx('return')} to="/manufacture/importhome">
+                Return
+            </Link>
 
             <div className={cx('container')}>
                 <div className={cx('import')}>
-                    <div className={cx('import_product_code')}>
-                        <span className={cx('title')}>Nhập mã sản phẩm</span>
-                        <input
-                            type="text"
-                            className={cx('product_code')}
-                            placeholder="Mã sản phẩm"
-                            onChange={(e) => setProductCode(e.target.value)}
-                        />
-                    </div>
-                    <div className={cx('import_quantity')}>
-                        <span className={cx('title')}>Nhập số lượng</span>
-                        <input
-                            type="text"
-                            className={cx('quantity')}
-                            placeholder="Nhập số lượng"
-                            onChange={(e) => setQuantity(e.target.value)}
-                        />
-                    </div>
+                    <span className={cx('title')}>Nhập mã sản phẩm</span>
+                    <input
+                        type="text"
+                        className={cx('product_code')}
+                        placeholder="Mã sản phẩm"
+                        onChange={(e) => setProductCode(e.target.value)}
+                    />
+
+                    <span className={cx('title')}>Nhập số lượng</span>
+                    <input
+                        type="text"
+                        className={cx('quantity')}
+                        placeholder="Nhập số lượng"
+                        onChange={(e) => setQuantity(e.target.value)}
+                    />
                 </div>
                 <button className={cx('submit')} onClick={handleSubmit}>
-                    <span className={cx('text_container')}>Nhập sản phẩm</span>
+                    Nhập sản phẩm
                 </button>
             </div>
         </div>

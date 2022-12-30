@@ -6,14 +6,13 @@ import { useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
-
 function AccountManagement() {
     const [accountType, setAccountType] = useState('store');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    
+
     const handleSubmit = () => {
-        if ((username != '') && (password != '')) {
+        if (username != '' && password != '') {
             alert(`Đã tạo tài khoản thành công cho ${accountType}`);
             console.log(accountType);
             console.log(username);
@@ -23,11 +22,9 @@ function AccountManagement() {
 
     return (
         <div className={cx('wrapper')}>
-            <button className={cx('return')}>
-                <Link to="/">
-                    <span className={cx('text_container')}>Return</span>
-                </Link>
-            </button>
+            <Link className={cx('return')} to="/">
+                Return
+            </Link>
 
             <div className={cx('container')}>
                 <div className={cx('account')}>
@@ -52,7 +49,7 @@ function AccountManagement() {
                     </select>
                 </div>
                 <button className={cx('submit')} onClick={handleSubmit}>
-                    <span className={cx('text_container')}>Tạo tài khoản</span>
+                    Tạo tài khoản
                 </button>
             </div>
         </div>
