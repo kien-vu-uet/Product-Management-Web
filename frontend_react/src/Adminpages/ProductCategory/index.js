@@ -2,7 +2,6 @@ import classNames from 'classnames/bind';
 import styles from './ProductCategory.module.scss';
 import React from 'react';
 import { useEffect, useState, useMemo } from 'react';
-import { TableFilter } from 'react-table-filter';
 import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);

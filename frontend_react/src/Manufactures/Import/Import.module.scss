@@ -49,6 +49,18 @@
     text-align: center;
 }
 
+select {
+    height: 30px;
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    text-align: center;
+    top: 25%;
+    justify-content: center;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+}
 
 .title {
    display: block;
@@ -88,6 +100,9 @@
     }
     .import input {
         padding: 5px;
+        width: 90%;
+    }
+    select {
         width: 90%;
     }
     .submit {

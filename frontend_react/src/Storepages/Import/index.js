@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
-let unique = []
+let unique = [];
 function Import() {
     const [stocks, setStocks] = useState('kho1');
     const [types, setTypes] = useState('Fx_580_pl');
@@ -24,7 +24,7 @@ function Import() {
             });
     }, []);
 
-    unique = [...new Set(datas.map(data => data.type))]
+    unique = [...new Set(datas.map((data) => data.type))];
 
     return (
         <div className={cx('wrapper')}>
@@ -46,7 +46,7 @@ function Import() {
                         ))}
                     </select>
                     <div className={cx('amount')}>
-                    <span>{amounts}</span>
+                        <span>{amounts}</span>
                         <input
                             type="range"
                             className={cx('input')}

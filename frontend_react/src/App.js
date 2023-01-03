@@ -21,78 +21,32 @@ const manufacture = {
     username: 'manufacture',
     password: '123',
 };
+let data = {}
 
 function App() {
     const [postStatus, setPostStatus] = useState('');
     const [user, setUser] = useState({ username: '' });
 
-    useEffect(() => {
-        // POST request using fetch inside useEffect React hook
+
+    const fetchData = async (user) => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ password : '1234567' })
+            body: JSON.stringify({ password: `${user.password}` }),
         };
-        fetch('http://127.0.0.1:8000/home/users/kienvt/', requestOptions)
-            .then(response => response.json())
-            .then(data => setPostStatus(data.accepted));
-    
-    // empty dependency array means this effect will only run once (like componentDidMount in classes)
-    }, []);
-
-    console.log(postStatus);
-
-
-    // useEffect(() => {
-    //     // POST request using fetch inside useEffect React hook
-    //     const requestOptions = {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({ password: '1234567' }),
-    //     };
-    //     fetch('http://127.0.0.1:8000/home/users/kienvt/', requestOptions)
-    //         .then((response) => response.json())
-    //         .then((data) => setPostStatus(data.accepted));
-
-    //     // empty dependency array means this effect will only run once (like componentDidMount in classes)
-    // }, []);
-
-    // console.log(postStatus);
+        fetch(`http://127.0.0.1:8000/home/users/${user.username}/`, requestOptions)
+            .then((response) => response.json())
+            .then((data) => setPostStatus(data));
+    };
 
     const Login = (details) => {
-        if (details.username == admin.username && details.password === admin.password) {
-            console.log('admin');
-            setUser({
-                username: details.username,
-                password : details.password
-            });
-        } else if (details.username === store.username && details.password === store.password) {
-            console.log('store');
-            setUser({
-                username: details.username,
-                password : details.password
-            });
-        } else if (details.username === warranty.username && details.password === warranty.password) {
-            console.log('warranty');
-            setUser({
-                username: details.username,
-                password : details.password
-            });
-        } else if(details.username === manufacture.username && details.password === manufacture.password)  {
-            console.log('manufacture');
-            setUser({
-                username: details.username,
-                password : details.password
-            });
-        } else {
-            alert('Mời nhập lại !!!');
-        }
+        fetchData(details);
     };
-    // const Logout = () => {
-    //     console.log('log out');
-    // };
+
     const render = () => {
-        if ((user.username === store.username) && (user.password == store.password)) {
+        console.log(postStatus.accepted)
+
+        if (postStatus.accepted === true && postStatus.role == 'store') {
             return (
                 <Routes>
                     {publicRoutes.map((routes, index) => {
@@ -119,7 +73,7 @@ function App() {
                     })}
                 </Routes>
             );
-        } else if ((user.username === warranty.username) && (user.password === warranty.password)) {
+        } else if (postStatus.accepted === true && postStatus.role == 'warranty') {
             return (
                 <Routes>
                     {warrantyRoutes.map((routes, index) => {
@@ -146,7 +100,7 @@ function App() {
                     })}
                 </Routes>
             );
-        } else if ((user.username === admin.username) && (user.password === admin.password)) {
+        } else if (postStatus.accepted === true && postStatus.role == 'admin') {
             return (
                 <Routes>
                     {adminRoutes.map((routes, index) => {
@@ -173,7 +127,7 @@ function App() {
                     })}
                 </Routes>
             );
-        } else if ((user.username === manufacture.username) && (user.password === manufacture.password)) {
+        } else if (postStatus.accepted === true && postStatus.role == 'manufacture') {
             return (
                 <Routes>
                     {manufactureRoutes.map((routes, index) => {

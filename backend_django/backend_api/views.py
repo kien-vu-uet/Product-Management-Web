@@ -95,6 +95,8 @@ def update_account(request, pk):
                     user = account,
                 )
                 response['session'] = session.id
+                response['username'] = account.username
+                response['role'] = account.role
                 return Response(response, HTTP_200_OK)
             except:
                 return Response('Required password', HTTP_400_BAD_REQUEST)
@@ -184,8 +186,15 @@ For product
 @api_view(['GET'])
 def get_all_products(request):
     products = Product.objects.all()
-    serializer = ProductSerializer(products, many=True)
-    return Response(serializer.data, HTTP_200_OK)
+    response = []
+    for p in products:
+        cat = p.category
+        p_seria = ProductSerializer(p, many=False)
+        c_seria = CategorySerializer(cat, many=False)
+        item = p_seria.data
+        item['category'] = c_seria.data
+        response.append(item)
+    return Response(response, HTTP_200_OK)
 
 @api_view(['POST'])
 def add_product(request):
@@ -421,13 +430,13 @@ def get_all_quantity_in_factory(request):
                 quantity[category.id] = 1
             else:
                 quantity[category.id] += 1
-        inventory = {}
+        inventory = []
         for id in list(quantity.keys()):
             category = Category.objects.get(id=id)
             cat_serializer = CategorySerializer(category, many=False)
             cat_data = cat_serializer.data
             cat_data['quantity'] = quantity[id]
-            inventory[id] = cat_data
+            inventory.append(cat_data) 
         serializer = FactorySerializer(factory, many=False)
         total_each = serializer.data
         total_each['inventory'] = inventory

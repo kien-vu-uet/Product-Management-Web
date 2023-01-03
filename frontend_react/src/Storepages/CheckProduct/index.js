@@ -7,7 +7,7 @@ let product = [];
 function CheckProduct() {
     const [datas, setDatas] = useState([]);
     const fetchData = () => {
-        fetch('http://localhost:8000/product')
+        fetch('http://127.0.0.1:8000/home/products/')
             .then((res) => res.json())
             .then(async (datas) => {
                 await setDatas(datas);
@@ -20,7 +20,7 @@ function CheckProduct() {
         await fetchData();
         if (target.length !== 0) {
             datas.map((data) => {
-                if (data.type === target) {
+                if (data.category.name === target) {
                     product.push(data);
                 }
             });
@@ -63,10 +63,10 @@ function CheckProduct() {
                         {datas.map((data, index) => (
                             <tr key={index}>
                                 <th>{data.id}</th>
-                                <th>{data.type}</th>
+                                <th>{data.category.name}</th>
                                 <th>{data.name}</th>
                                 <th>{data.price}</th>
-                                <th>{data.import_date}</th>
+                                <th>{data.manifactoring_date}</th>
                                 <th>{data.status}</th>
                             </tr>
                         ))}
